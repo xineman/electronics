@@ -1,4 +1,5 @@
 const path = require('path');
+const config = require('config');
 const {
   HotModuleReplacementPlugin,
   NamedModulesPlugin,
@@ -6,24 +7,18 @@ const {
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
-module.exports = merge.strategy(
-  {
-    entry: 'prepend',
-  },
-)(common, {
-  entry: [
+module.exports = merge.strategy({
+  entry: 'prepend',
+})(common, {
+/*   entry: [
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
-  ],
+  ], */
   devtool: 'inline-source-map',
   devServer: {
     proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        // pathRewrite: { '^/api': '' },
-      },
-      '/token': 'http://localhost:3000',
+      '/api': `http://localhost:${config.port}`,
     },
     historyApiFallback: true,
     hot: true,
