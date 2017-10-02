@@ -1,19 +1,19 @@
 <template>
   <header class="header">
-    <a class="logo-container" href="/">
+    <router-link class="logo-container" to="/">
       <img class="logo" src="../assets/img/geek.svg" alt="" />
       <p class="logo-text">Geek shop</p>
-    </a>
+    </router-link>
     <form class="search-form">
       <input class="search-input" type="text" placeholder="Search for something..."/>
       <button class="search-button"><img class="search-icon" src="../assets/img/search_bold.svg" alt="Search"></button>
     </form>
     <nav class="account">
       <div class="nav-link-container">
-        <a class="nav-link" href="">Sign in</a>
+        <router-link class="nav-link" to="signin">Sign in</router-link>
       </div>
       <div class="nav-link-container">
-        <a class="nav-link" href="">Sign up</a>
+        <router-link class="nav-link" to="signup">Sign up</router-link>
       </div>
     </nav>
   </header>

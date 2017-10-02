@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <top-header></top-header>
+    <top-menu></top-menu>
     <router-view></router-view>
     <ul>
       <li v-bind:key="user.lastname" v-for="user in users">
@@ -13,6 +14,7 @@
 
 <script>
 import TopHeader from './components/Header';
+import TopMenu from './components/Menu';
 
 export default {
   data() {
@@ -28,6 +30,7 @@ export default {
   name: 'app',
   components: {
     'top-header': TopHeader,
+    'top-menu': TopMenu,
   },
 };
 </script>
