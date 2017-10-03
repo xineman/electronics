@@ -1,10 +1,13 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div class="popular">
+    <h1>Popular recently</h1>
+    <product-list></product-list>
   </div>
 </template>
 
 <script>
+import ProductList from './ProductList';
+
 export default {
   name: 'hello',
   data() {
@@ -12,27 +15,13 @@ export default {
       msg: 'This motherfucking shit works!',
     };
   },
+  components: {
+    'product-list': ProductList,
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-  font-size: 100px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+  
 </style>

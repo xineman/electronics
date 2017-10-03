@@ -2,13 +2,9 @@
   <div id="app">
     <top-header></top-header>
     <top-menu></top-menu>
-    <router-view></router-view>
-    <ul>
-      <li v-bind:key="user.lastname" v-for="user in users">
-        {{user.firstname}} {{user.lastname}}
-      </li>
-    </ul>
-    <input type="text" v-model="input_val">
+    <main class="main">
+      <router-view></router-view>
+    </main>
   </div>
 </template>
 
@@ -19,12 +15,6 @@ import TopMenu from './components/Menu';
 export default {
   data() {
     return {
-      users: [
-        { firstname: 'Sebastian', lastname: 'Eschweiler' },
-        { firstname: 'Bill', lastname: 'Smith' },
-        { firstname: 'John', lastname: 'Porter' },
-      ],
-      input_val: '',
     };
   },
   name: 'app',
@@ -40,6 +30,9 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+.main {
+  padding: 0 30px;
 }
 /* roboto-300 - cyrillic_latin */
 @font-face {
@@ -81,7 +74,5 @@ export default {
   font-family: 'Roboto', 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
 }
 </style>
