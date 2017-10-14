@@ -13,16 +13,9 @@ export default {
   components: {
     'product-card': ProductCard,
   },
+  props: ['products'],
   data() {
     return {
-      products: [
-        {
-          name: 'Laptop 1',
-        },
-        {
-          name: 'Laptop 2',
-        },
-      ],
     };
   },
 };

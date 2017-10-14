@@ -4,9 +4,7 @@
     <div class="description">
       <h3 class="name">{{product.name}}</h3>
       <ul class="params">
-        <li class="param">Great screen</li>
-        <li class="param">15.6"</li>
-        <li class="param">8GB RAM</li>
+        <li :key="param" class="param" v-for="(param, name) in product.params">{{name}}: {{param}}</li>
       </ul>
     </div>
   </div>

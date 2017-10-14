@@ -5,8 +5,13 @@
       <p class="logo-text">Geek shop</p>
     </router-link>
     <form class="search-form">
-      <input class="search-input" type="text" placeholder="Search for something..."/>
+      <input v-model="query" class="search-input" type="text" placeholder="Search for something..."/>
       <button class="search-button"><img class="search-icon" src="../assets/img/search_bold.svg" alt="Search"></button>
+      <ul v-if="query !== ''" class="dropdown">
+        <li :key="result" v-for="result in results" class="dropdown-item">
+          {{result}}
+        </li>
+      </ul>
     </form>
     <nav class="account">
       <div class="nav-link-container">
@@ -20,8 +25,35 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  name: 'top-header2',
+  data() {
+    return {
+      name: 'top-header2',
+      query: '',
+      results: [],
+    };
+  },
+  watch: {
+    query(newQuery) {
+      // this.answer = 'Waiting for you to stop typing...'
+      this.getResults(newQuery);
+    },
+  },
+  methods: {
+    getResults(query) {
+      // this.answer = 'Thinking...'
+      axios.get('/api/search', {
+        params: {
+          input: query,
+        },
+      })
+        .then((response) => {
+          this.results = response.data;
+        });
+    },
+  },
 };
 </script>
 
@@ -120,5 +152,19 @@ export default {
         right: 0;
       }
     }
+  }
+  .dropdown {
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: 5px;
+    top: 100%;
+    background: #f0f0f0;
+    list-style-type: none;
+  }
+  .dropdown-item {
+    padding: 5px;
+    text-transform: none;
+    color: #2B515D;
   }
 </style>
