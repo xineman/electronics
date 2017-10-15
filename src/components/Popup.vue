@@ -2,10 +2,6 @@
   <div @click="close" class="popup">
     <div class="popup-wrapper">
       <slot>Empty popup</slot>
-      <div class="buttons">
-        <button class="button success">submit</button>
-        <button class="button fail close">cancel</button>
-      </div>
     </div>
   </div>
 </template>
@@ -22,7 +18,7 @@ export default {
 };
 </script>
 
-<style lang="postcss" scoped>
+<style lang="postcss">
   .buttons {
     display: flex;
     justify-content: center;

@@ -1,5 +1,9 @@
 const router = require('express').Router();
 
+router.post('/user/login', (req, res) => {
+  res.send(JSON.stringify(req.body));
+});
+
 router.get('/search', (req, res) => {
   res.json([`${req.query.input}1`, `${req.query.input}33`]);
 });

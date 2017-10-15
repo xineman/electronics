@@ -1,12 +1,12 @@
 <template>
   <header class="header">
     <router-link class="logo-container" to="/">
-      <img class="logo" src="../assets/img/geek.svg" alt="" />
+      <img class="logo" src="../assets/img/header/geek.svg" alt="" />
       <p class="logo-text">Geek shop</p>
     </router-link>
     <form class="search-form">
       <input v-model="query" class="search-input" type="text" placeholder="Search for something..."/>
-      <button class="search-button"><img class="search-icon" src="../assets/img/search_bold.svg" alt="Search"></button>
+      <button class="search-button"><img class="search-icon" src="../assets/img/header/search_bold.svg" alt="Search"></button>
       <ul v-if="query !== ''" class="dropdown">
         <li :key="result" v-for="result in results" class="dropdown-item">
           {{result}}
@@ -19,6 +19,16 @@
       </div>
       <div class="nav-link-container">
         <a class="nav-link">Sign up</a>
+      </div>
+      <div class="nav-link-container">
+        <router-link class="nav-link" to="/cart">
+          <img class="link-img" src="../assets/img/header/cart.svg" alt="Cart" />
+        </router-link>
+      </div>
+      <div class="nav-link-container">
+        <router-link class="nav-link" to="/wishes">
+          <img class="link-img" src="../assets/img/header/wish.svg" alt="Wishes" />
+        </router-link>
       </div>
     </nav>
     <transition name="fade">
@@ -89,6 +99,7 @@ export default {
   .logo {
     height: 100%;
     margin-right: 10px;
+    display: block;
   }
   .logo-text {
     font-size: 14px;
@@ -143,6 +154,9 @@ export default {
     overflow: hidden;
     margin: 0 10px;
     padding-bottom: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .nav-link {
     font-size: 14px;
@@ -151,6 +165,9 @@ export default {
     text-decoration: none;
     position: relative;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &::after {
       position: absolute;
       content: '';
@@ -167,6 +184,12 @@ export default {
       }
     }
   }
+
+  .link-img {
+    height: 24px;
+    display: block;
+  }
+
   .dropdown {
     position: absolute;
     left: 0;

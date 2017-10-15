@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 import App from './App';
 import router from './router';
 
@@ -12,6 +13,17 @@ const store = new Vuex.Store({
   mutations: {
     setAuthenticated(state, isAuthenticated) {
       state.isAuthenticated = isAuthenticated;
+    },
+  },
+  actions: {
+    signIn({ commit }, { username, password }) {
+      console.log(username); // eslint-disable-line
+      axios.post('/api/user/login', {
+        username,
+        password,
+      })
+        .then(res => console.log(res.data)) // eslint-disable-line
+      commit('setAuthenticated', true);
     },
   },
 });
