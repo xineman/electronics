@@ -1,7 +1,13 @@
 const router = require('express').Router();
 
+const jwt = require('jsonwebtoken');
+const config = require('config');
+
 router.post('/user/login', (req, res) => {
-  res.send(JSON.stringify(req.body));
+  const token = jwt.sign({
+    sub: req.body.username,
+  }, config.secret);
+  res.send(token);
 });
 
 router.get('/search', (req, res) => {

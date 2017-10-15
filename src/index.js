@@ -8,7 +8,7 @@ Vue.config.productionTip = false;
 Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
-    isAuthenticated: 0,
+    isAuthenticated: false,
   },
   mutations: {
     setAuthenticated(state, isAuthenticated) {
@@ -17,7 +17,6 @@ const store = new Vuex.Store({
   },
   actions: {
     signIn({ commit }, { username, password }) {
-      console.log(username); // eslint-disable-line
       axios.post('/api/user/login', {
         username,
         password,

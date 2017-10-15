@@ -14,19 +14,28 @@
       </ul>
     </form>
     <nav class="account">
-      <div class="nav-link-container">
-        <a @click="signInPopup = true" class="nav-link">Sign in</a>
+      <div v-if="!isAuthenticated" class="nav-link-group">
+        <div class="nav-link-container">
+          <a @click="signInPopup = true" class="nav-link">Sign in</a>
+        </div>
+        <div class="nav-link-container">
+          <a class="nav-link">Sign up</a>
+        </div>
+      </div>
+      <div v-else class="nav-link-group">
+        <div class="nav-link-container">
+          <a class="nav-link nav-link_img">
+            <img class="link-img" src="../assets/img/header/profile.svg" alt="Profile" />
+          </a>
+        </div>
       </div>
       <div class="nav-link-container">
-        <a class="nav-link">Sign up</a>
-      </div>
-      <div class="nav-link-container">
-        <router-link class="nav-link" to="/cart">
+        <router-link class="nav-link nav-link_img" to="/cart">
           <img class="link-img" src="../assets/img/header/cart.svg" alt="Cart" />
         </router-link>
       </div>
       <div class="nav-link-container">
-        <router-link class="nav-link" to="/wishes">
+        <router-link class="nav-link nav-link_img" to="/wishes">
           <img class="link-img" src="../assets/img/header/wish.svg" alt="Wishes" />
         </router-link>
       </div>
@@ -41,6 +50,7 @@
 
 <script>
 import axios from 'axios';
+import { mapState } from 'vuex';
 import Popup from './Popup';
 import SignIn from './SignIn';
 
@@ -73,6 +83,9 @@ export default {
         });
     },
   },
+  computed: mapState({
+    isAuthenticated: 'isAuthenticated',
+  }),
   components: {
     'sign-in': SignIn,
     popup: Popup,
@@ -150,9 +163,11 @@ export default {
     position: relative;
     display: flex;
   }
+
   .nav-link-container {
     overflow: hidden;
-    margin: 0 10px;
+    margin-left: 10px;
+    margin-right: 10px;
     padding-bottom: 2px;
     display: flex;
     align-items: center;
@@ -168,7 +183,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    &::after {
+    &:not(.nav-link_img)::after {
       position: absolute;
       content: '';
       width: 100%;
@@ -183,6 +198,14 @@ export default {
         right: 0;
       }
     }
+  }
+
+  .nav-link-group {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right: 1px solid #FFF;
   }
 
   .link-img {

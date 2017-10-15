@@ -13,16 +13,14 @@
         <input v-model="password" id="password" type="text" class="input" placeholder="Enter password" />
       </div>
       <div class="buttons">
-        <button type="button" @click="signIn({username, password})" class="button success">submit</button>
-        <button class="button fail close">cancel</button>
+        <button type="button" @click="signIn" class="button success">submit</button>
+        <button type="button" @click="$parent.$emit('close')" class="button fail close">cancel</button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
 export default {
   data() {
     return {
@@ -31,9 +29,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions([
-      'signIn',
-    ]),
+    signIn() {
+      this.$parent.$emit('close');
+      this.$store.dispatch('signIn', {
+        username: this.username,
+        password: this.password,
+      });
+    },
   },
 };
 </script>
