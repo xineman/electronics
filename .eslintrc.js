@@ -16,6 +16,7 @@ module.exports = {
       'js': 'never',
       'vue': 'never'
     }],
+    "no-param-reassign": [2, { "props": false }]
   },
   'env': {
     'browser': true,

@@ -34,6 +34,26 @@ export default {
 .main {
   padding: 0 30px;
 }
+.popup {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(130, 130, 130, .8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: none;
+}
+.popup-wrapper {
+  max-width: 100%;
+  max-height: 100%;
+  background: #FFF;
+  padding: 15px;
+  box-shadow: 0 2px 20px 0px #2B515D;
+  color: #191919;
+}
 /* roboto-300 - cyrillic_latin */
 @font-face {
   font-family: 'Roboto';

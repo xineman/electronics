@@ -15,17 +15,22 @@
     </form>
     <nav class="account">
       <div class="nav-link-container">
-        <router-link class="nav-link" to="signin">Sign in</router-link>
+        <a @click="signInPopup = true" class="nav-link">Sign in</a>
       </div>
       <div class="nav-link-container">
-        <router-link class="nav-link" to="signup">Sign up</router-link>
+        <a class="nav-link">Sign up</a>
       </div>
     </nav>
+    <popup v-if="signInPopup">
+      <sign-in></sign-in>
+    </popup>
   </header>
 </template>
 
 <script>
 import axios from 'axios';
+import Popup from './Popup';
+import SignIn from './SignIn';
 
 export default {
   data() {
@@ -33,6 +38,8 @@ export default {
       name: 'top-header2',
       query: '',
       results: [],
+      signInPopup: false,
+      signUpPopup: false,
     };
   },
   watch: {
@@ -53,6 +60,10 @@ export default {
           this.results = response.data;
         });
     },
+  },
+  components: {
+    'sign-in': SignIn,
+    popup: Popup,
   },
 };
 </script>
@@ -137,6 +148,7 @@ export default {
     color: #FFF;
     text-decoration: none;
     position: relative;
+    cursor: pointer;
     &::after {
       position: absolute;
       content: '';
