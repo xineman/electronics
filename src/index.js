@@ -21,7 +21,7 @@ const store = new Vuex.Store({
         username,
         password,
       })
-        .then(res => console.log(res.data)) // eslint-disable-line
+        .then(res => localStorage.setItem('jwt', res.data)) // eslint-disable-line
       commit('setAuthenticated', true);
     },
   },
