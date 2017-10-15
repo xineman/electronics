@@ -21,9 +21,11 @@
         <a class="nav-link">Sign up</a>
       </div>
     </nav>
-    <popup v-if="signInPopup">
-      <sign-in></sign-in>
-    </popup>
+    <transition name="fade">
+      <popup v-on:close="signInPopup = false" v-if="signInPopup">
+        <sign-in></sign-in>
+      </popup>
+    </transition>
   </header>
 </template>
 
@@ -178,5 +180,13 @@ export default {
     padding: 5px;
     text-transform: none;
     color: #2B515D;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .25s;
+  }
+
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: .1;
   }
 </style>

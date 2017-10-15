@@ -53,6 +53,17 @@ export default {
   padding: 15px;
   box-shadow: 0 2px 20px 0px #2B515D;
   color: #191919;
+  position: relative;
+  animation: slidedown .3s;
+}
+
+@keyframes slidedown {
+  from {
+    top: -50vh;
+  }
+  to {
+    top: 0;
+  }
 }
 /* roboto-300 - cyrillic_latin */
 @font-face {
