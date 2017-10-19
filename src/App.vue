@@ -9,8 +9,10 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 import TopHeader from './components/Header';
 import TopMenu from './components/Menu';
+// import axios from 'axios';
 
 export default {
   data() {
@@ -21,6 +23,20 @@ export default {
   components: {
     'top-header': TopHeader,
     'top-menu': TopMenu,
+  },
+  created() {
+    this.checkAuth();
+  },
+  methods: {
+    checkAuth() {
+      const jwt = localStorage.getItem('jwt');
+      if (jwt) {
+        this.setAuthenticated(true);
+      }
+    },
+    ...mapMutations([
+      'setAuthenticated',
+    ]),
   },
 };
 </script>

@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <router-link class="product" to="/product">
     <img class="image" src="http://via.placeholder.com/250x200" alt="Laptop" />
     <div class="description">
       <h3 class="name">{{product.name}}</h3>
+      <p class="price">{{product.price}}</p>
       <ul class="params">
         <li :key="param" class="param" v-for="(param, name) in product.params">{{name}}: {{param}}</li>
       </ul>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -18,6 +19,9 @@ export default {
 
 
 <style lang="postcss" scoped>
+  .product {
+    text-decoration: none;
+  }
   .image {
     display: block;
   }

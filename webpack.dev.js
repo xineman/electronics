@@ -3,6 +3,7 @@ const config = require('config');
 const {
   HotModuleReplacementPlugin,
   NamedModulesPlugin,
+  DefinePlugin,
 } = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
@@ -32,5 +33,8 @@ module.exports = merge.strategy({
   plugins: [
     new NamedModulesPlugin(),
     new HotModuleReplacementPlugin(),
+    new DefinePlugin({
+      baseUrl: "'http://localhost:3000'",
+    }),
   ],
 });

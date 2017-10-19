@@ -22,13 +22,19 @@
           <a class="nav-link">Sign up</a>
         </div>
       </div>
+
       <div v-else class="nav-link-group">
         <div class="nav-link-container">
-          <a class="nav-link nav-link_img">
+          <a @click="showDropdown = !showDropdown" class="nav-link nav-link_img">
             <img class="link-img" src="../assets/img/header/profile.svg" alt="Profile" />
           </a>
+          <ul v-if="showDropdown" class="profile-dropdown">
+            <li class="profile-dropdown-item"><a class="menu-link" @click="openProfile">View profile</a></li>
+            <li class="profile-dropdown-item"><a class="menu-link" @click="logout">Logout</a></li>
+          </ul>
         </div>
       </div>
+
       <div class="nav-link-container">
         <router-link class="nav-link nav-link_img" to="/cart">
           <img class="link-img" src="../assets/img/header/cart.svg" alt="Cart" />
@@ -50,7 +56,7 @@
 
 <script>
 import axios from 'axios';
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import Popup from './Popup';
 import SignIn from './SignIn';
 
@@ -62,6 +68,7 @@ export default {
       results: [],
       signInPopup: false,
       signUpPopup: false,
+      showDropdown: false,
     };
   },
   watch: {
@@ -82,6 +89,18 @@ export default {
           this.results = response.data;
         });
     },
+    logout() {
+      this.showDropdown = false;
+      this.setAuthenticated(false);
+      localStorage.removeItem('jwt');
+    },
+    openProfile() {
+      this.showDropdown = false;
+      this.$router.push('/profile');
+    },
+    ...mapMutations([
+      'setAuthenticated',
+    ]),
   },
   computed: mapState({
     isAuthenticated: 'isAuthenticated',
@@ -206,6 +225,7 @@ export default {
     margin-right: 10px;
     padding-right: 10px;
     border-right: 1px solid #FFF;
+    position: relative;
   }
 
   .link-img {
@@ -228,11 +248,32 @@ export default {
     color: #2B515D;
   }
 
+  .profile-dropdown {
+    position: absolute;
+    right: 0;
+    width: 150px;
+    padding: 5px;
+    top: calc(100% + 10px);
+    background: #FFF;
+    list-style-type: none;
+    box-shadow: 0 2px 20px 0px #2B515D;
+  }
+  .profile-dropdown-item {
+    padding: 5px;
+    text-transform: none;
+
+  }
+  .menu-link {
+    cursor: pointer;
+    text-decoration: none;
+    color: #2B515D;
+  }
+
   .fade-enter-active, .fade-leave-active {
     transition: opacity .25s;
   }
 
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  .fade-enter, .fade-leave-to {
     opacity: .1;
   }
 </style>
