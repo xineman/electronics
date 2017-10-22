@@ -19,7 +19,7 @@
           <a @click="signInPopup = true" class="nav-link">Sign in</a>
         </div>
         <div class="nav-link-container">
-          <a class="nav-link">Sign up</a>
+          <a @click="signUpPopup = true" class="nav-link">Sign up</a>
         </div>
       </div>
 
@@ -51,6 +51,11 @@
         <sign-in></sign-in>
       </popup>
     </transition>
+    <transition name="fade">
+      <popup v-on:close="signUpPopup = false" v-if="signUpPopup">
+        <sign-up></sign-up>
+      </popup>
+    </transition>
   </header>
 </template>
 
@@ -59,6 +64,7 @@ import axios from 'axios';
 import { mapState, mapMutations } from 'vuex';
 import Popup from './Popup';
 import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 export default {
   data() {
@@ -107,6 +113,7 @@ export default {
   }),
   components: {
     'sign-in': SignIn,
+    'sign-up': SignUp,
     popup: Popup,
   },
 };

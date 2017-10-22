@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from './api';
 import App from './App';
 import router from './router';
+import { signIn, signUp } from './api/user';
 
 Vue.config.productionTip = false;
 Vue.use(Vuex);
@@ -16,11 +16,13 @@ const store = new Vuex.Store({
     },
   },
   actions: {
-    signIn({ commit }, { username, password }) {
-      axios.post('/api/user/login', {
-        username,
-        password,
-      })
+    signIn({ commit }, data) {
+      signIn(data)
+        .then(res => localStorage.setItem('jwt', res.data)) // eslint-disable-line
+      commit('setAuthenticated', true);
+    },
+    signUp({ commit }, data) {
+      signUp(data)
         .then(res => localStorage.setItem('jwt', res.data)) // eslint-disable-line
       commit('setAuthenticated', true);
     },

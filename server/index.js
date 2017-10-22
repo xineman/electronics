@@ -2,9 +2,11 @@
 const config = require('config');
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const sequelize = require('./services/sequelize');
 
 const app = express();
+sequelize.sync();
 
 app.use(bodyParser.json());
 

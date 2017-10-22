@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 import ProductList from './ProductList';
+import { getAll as getProductsApi } from '../api/products';
 
 export default {
   name: 'hello',
@@ -21,7 +21,7 @@ export default {
     'product-list': ProductList,
   },
   created() {
-    axios.get('/api/products')
+    getProductsApi()
       .then((res) => {
         this.products = res.data;
       });

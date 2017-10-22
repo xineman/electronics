@@ -1,9 +1,11 @@
 <template>
-  <router-link class="product" to="/product">
-    <img class="image" src="http://via.placeholder.com/250x200" alt="Laptop" />
+  <router-link class="container" to="/product/3">
+    <div class="image-wrapper">
+      <img class="image" :src="product.image" alt="Laptop" />
+    </div>
     <div class="description">
       <h3 class="name">{{product.name}}</h3>
-      <p class="price">{{product.price}}</p>
+      <p class="price">$ {{product.price}}</p>
       <ul class="params">
         <li :key="param" class="param" v-for="(param, name) in product.params">{{name}}: {{param}}</li>
       </ul>
@@ -19,19 +21,49 @@ export default {
 
 
 <style lang="postcss" scoped>
-  .product {
+  .container {
     text-decoration: none;
+    color: #171717;
+    display: block;
+    border: 1px solid #2B515D;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: .25s;
+    &:hover {
+      box-shadow: 0px 0px 20px -5px #2B515D;
+    }
+  }
+  .image-wrapper {
+    width: 250px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
   }
   .image {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 120%;
     display: block;
   }
   .description {
     padding: 10px;
   }
   .name {
-    font-weight: 700;
+    font-weight: 500;
     font-size: 16px;
     margin-bottom: 5px;
+  }
+  .price {
+    font-size: 18px;
+    font-weight: 500;
+    color: #ED3223;
+    margin: 5px 0;
   }
   .params {
     list-style-type: none;

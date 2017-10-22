@@ -47,11 +47,15 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  color: #171717;
+}
 .main {
-  padding: 0 30px;
+  padding: 10px 30px;
 }
 .popup {
   position: fixed;
+  z-index: 100;
   left: 0;
   right: 0;
   top: 0;
