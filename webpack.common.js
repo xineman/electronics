@@ -28,7 +28,7 @@ module.exports = {
         include: path.resolve(__dirname, 'src'),
       },
       {
-        test: /\.vue$/,
+        test: /\.(vue)$/,
         loader: 'vue-loader',
         options: {
           cssSourceMap: true,
@@ -68,24 +68,24 @@ module.exports = {
       //     ],
       //   }),
       // },
-      // {
-      //   test: /\.css$/,
-      //   include: [
-      //     /node_modules/,
-      //     path.resolve(__dirname, 'src/styles/'),
-      //   ],
-      //   loader: ExtractTextPlugin.extract({
-      //     fallback: 'style-loader',
-      //     use: [{
-      //       loader: 'css-loader',
-      //       options: {
-      //         sourceMap: true,
-      //       },
-      //     },
-      //     { loader: 'postcss-loader', options: { sourceMap: true } },
-      //     ],
-      //   }),
-      // },
+      {
+        test: /\.css$/,
+        include: [
+          /node_modules/,
+          // path.resolve(__dirname, 'src/styles/'),
+        ],
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [{
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          // { loader: 'postcss-loader', options: { sourceMap: true } },
+          ],
+        }),
+      },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         loader: 'file-loader',

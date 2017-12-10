@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import VueNotifications from 'vue-notifications';
+
 export default {
   data() {
     return {
@@ -34,7 +36,21 @@ export default {
       this.$store.dispatch('signIn', {
         username: this.username,
         password: this.password,
-      });
+      })
+        .then(() => this.showSuccessMsg())
+        .catch(({ response: r }) => this.showErrorMsg({
+          message: r.data.error,
+        }));
+    },
+  },
+  notifications: {
+    showSuccessMsg: {
+      type: VueNotifications.types.success,
+      message: 'Successfully signed in',
+    },
+    showErrorMsg: {
+      type: VueNotifications.types.error,
+      message: 'Error',
     },
   },
 };
