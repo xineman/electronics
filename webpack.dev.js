@@ -34,7 +34,7 @@ module.exports = merge.strategy({
     new NamedModulesPlugin(),
     new HotModuleReplacementPlugin(),
     new DefinePlugin({
-      baseUrl: "'http://localhost:3000'",
+      baseURL: "'http://localhost:3000'",
     }),
   ],
 });
