@@ -2,45 +2,57 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
-function login(req, res) {
-  User.find({
-    where: {
-      username: req.body.username,
-    },
-  })
-    .then((user) => {
-      if (user) {
-        const token = jwt.sign({
-          sub: req.body.username,
-        }, config.secret);
-        res.send(token);
-      } else {
-        res.sendStatus(401);
-      }
-    })
-    .catch(() => res.sendStatus(500));
+async function login(req, res) {
+  try {
+    const { username, password } = req.body;
+    if (!username || !password) {
+      throw new Error('No username or password specified.');
+    }
+    const user = await User.find({
+      where: {
+        username,
+      },
+    });
+    if (user) {
+      const token = jwt.sign({
+        sub: username,
+      }, config.secret);
+      res.status(201).json({ token });
+    } else {
+      res.sendStatus(401);
+    }
+  } catch (error) {
+    res.status(500).json({
+      error,
+    });
+  }
 }
 
-function register(req, res) {
-  User.find({
-    where: {
-      username: req.body.username,
-    },
-  })
-    .then((user) => {
-      if (user) {
-        res.sendStatus(400);
-      } else {
-        User.create(req.body)
-          .then(() => {
-            const token = jwt.sign({
-              sub: req.body.username,
-            }, config.secret);
-            res.status(201).send(token);
-          });
-      }
-    })
-    .catch(() => res.sendStatus(500));
+async function register(req, res) {
+  try {
+    const { username, password } = req.body;
+    if (!username || !password) {
+      throw new Error('No username or password specified.');
+    }
+    const user = await User.find({
+      where: {
+        username,
+      },
+    });
+    if (user) {
+      res.sendStatus(400);
+    } else {
+      await User.create({ username, password });
+      const token = jwt.sign({
+        sub: username,
+      }, config.secret);
+      res.status(201).json({ token });
+    }
+  } catch (error) {
+    res.status(500).json({
+      error,
+    });
+  }
 }
 
 function getMyProfile(req, res) {
