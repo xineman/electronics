@@ -1,6 +1,8 @@
 const User = require('../models/User');
 
-function usersFixture() {
+
+async function usersFixture() {
+  await User.sync({ force: true });
   const usersMock = [
     {
       name: 'Yurii Hupalo',
@@ -28,7 +30,7 @@ function usersFixture() {
     },
   ];
   const promises = [];
-  for (let user of usersMock) {
+  for (const user of usersMock) {
     promises.push(User.create(user));
   }
   return Promise.all(promises)
