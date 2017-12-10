@@ -9,13 +9,10 @@ const Product = sequelize.define('product', {
   stock: { type: Sequelize.INTEGER },
   params: { type: Sequelize.STRING },
   image: { type: Sequelize.STRING },
-  categoryId: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: Category,
-      key: 'id',
-    },
-  },
+});
+
+Product.belongsTo(Category, {
+  onDelete: 'RESTRICT',
 });
 
 module.exports = Product;

@@ -2,7 +2,6 @@ const Product = require('../models/Product');
 
 
 async function productsFixture() {
-  await Product.sync({ force: true });
   const productsMock = [
     {
       name: 'HP Laptop',

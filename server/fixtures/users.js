@@ -2,7 +2,6 @@ const User = require('../models/User');
 
 
 async function usersFixture() {
-  await User.sync({ force: true });
   const usersMock = [
     {
       name: 'Yurii Hupalo',

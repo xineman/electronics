@@ -2,7 +2,6 @@ const Category = require('../models/Category');
 
 
 async function categoriesFixture() {
-  await Category.sync({ force: true });
   const categorysMock = [
     {
       name: 'laptops',
