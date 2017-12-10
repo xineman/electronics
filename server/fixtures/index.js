@@ -11,6 +11,7 @@ module.exports = { usersFixture, productsFixture, categoriesFixture };
     await categoriesFixture();
     await productsFixture();
     await usersFixture();
+    process.exit();
   } catch (e) {
     console.log('Error:', e.message);
   }
