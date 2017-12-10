@@ -13,17 +13,19 @@ async function login(req, res) {
         username,
       },
     });
-    if (user) {
+    if (user && user.password === password) {
       const token = jwt.sign({
         sub: username,
       }, config.secret);
       res.status(201).json({ token });
     } else {
-      res.sendStatus(401);
+      res.status(401).json({
+        error: 'Username or password is invalid',
+      });
     }
-  } catch (error) {
+  } catch (e) {
     res.status(500).json({
-      error,
+      error: e.message,
     });
   }
 }
@@ -48,9 +50,9 @@ async function register(req, res) {
       }, config.secret);
       res.status(201).json({ token });
     }
-  } catch (error) {
+  } catch (e) {
     res.status(500).json({
-      error,
+      error: e.message,
     });
   }
 }
