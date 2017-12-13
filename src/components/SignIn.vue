@@ -32,12 +32,14 @@ export default {
   },
   methods: {
     signIn() {
-      this.$parent.$emit('close');
       this.$store.dispatch('signIn', {
         username: this.username,
         password: this.password,
       })
-        .then(() => this.showSuccessMsg())
+        .then(() => {
+          this.showSuccessMsg();
+          this.$parent.$emit('close');
+        })
         .catch(({ response: r }) => this.showErrorMsg({
           message: r.data.error,
         }));
