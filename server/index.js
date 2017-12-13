@@ -7,7 +7,9 @@ const sequelize = require('./services/sequelize');
 const cors = require('cors');
 
 const app = express();
-sequelize.sync();
+
+sequelize.sync()
+  .catch(() => console.error('Error: Connection to DB failed'));
 
 app.use(bodyParser.json());
 
