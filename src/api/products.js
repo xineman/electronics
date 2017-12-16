@@ -6,8 +6,13 @@ export const getAll = () =>
 export const getOne = id =>
   axios.get(`api/products/${id}`);
 
-export const buy = (id, count) =>
-  axios.post('/api/products/buy', {
+export const cart = (id, count) =>
+  axios.post('/api/products/cart', {
     id,
     count,
+  });
+
+export const wish = id =>
+  axios.post('/api/products/wish', {
+    id,
   });

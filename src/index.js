@@ -9,8 +9,8 @@ import {
   signIn,
   signUp,
   getAll,
-  buy,
-  buy as wish,
+  cart,
+  wish,
   getOne,
 } from './api';
 
@@ -92,7 +92,7 @@ const store = new Vuex.Store({
         });
     },
     buyProduct({ commit }, { id, count }) {
-      buy(id, count)
+      cart(id, count)
         .then(() => commit('addToCart', id));
     },
     wishProduct({ commit }, { id }) {
