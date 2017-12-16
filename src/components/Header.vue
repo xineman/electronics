@@ -109,7 +109,7 @@ export default {
     ]),
   },
   computed: mapState({
-    isAuthenticated: 'isAuthenticated',
+    isAuthenticated: ({ user }) => user.isAuthenticated,
   }),
   components: {
     'sign-in': SignIn,

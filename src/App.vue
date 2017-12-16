@@ -26,6 +26,7 @@ export default {
   },
   created() {
     this.checkAuth();
+    this.$store.dispatch('getWishes');
   },
   methods: {
     checkAuth() {

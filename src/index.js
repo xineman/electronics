@@ -12,6 +12,7 @@ import {
   cart,
   wish,
   getOne,
+  getWishes as getWishesApi,
 } from './api';
 
 function toast({
@@ -48,6 +49,9 @@ const store = new Vuex.Store({
     setAuthenticated({ user }, isAuthenticated) {
       user.isAuthenticated = isAuthenticated;
     },
+    setWishes({ user }, wishes) {
+      user.wishList = wishes;
+    },
     setProducts(state, products) {
       state.products = products;
     },
@@ -83,6 +87,12 @@ const store = new Vuex.Store({
       getAll()
         .then(({ data }) => {
           commit('setProducts', data);
+        });
+    },
+    getWishes({ commit }) {
+      getWishesApi()
+        .then(({ data }) => {
+          commit('setWishes', data);
         });
     },
     getProduct({ commit }, { id }) {
