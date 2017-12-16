@@ -27,15 +27,6 @@ function getAll(req, res) {
     .catch(console.log);
 }
 
-function cart(req, res) {
-  res.sendStatus(200);
-}
-
-function wish(req, res) {
-  res.json({
-    status: 1,
-  });
-}
 
 function create(req, res) {
   Product.create({
@@ -53,7 +44,5 @@ function create(req, res) {
 module.exports = {
   getProduct,
   getAll,
-  cart,
-  wish,
   create,
 };
