@@ -11,13 +11,17 @@ async function productsFixture() {
       price: faker.random.number({ min: 100000, max: 8000000 }),
       stock: faker.random.number(40),
       params: JSON.stringify({
-        [faker.commerce.productMaterial()]: faker.commerce.productAdjective(),
-        [faker.commerce.productMaterial()]: faker.commerce.productAdjective(),
-        [faker.commerce.productMaterial()]: faker.commerce.productAdjective(),
-        [faker.commerce.productMaterial()]: faker.commerce.productAdjective(),
-        [faker.commerce.productMaterial()]: faker.commerce.productAdjective(),
+        [faker.commerce.productMaterial()]: faker.lorem.sentence(7),
+        [faker.commerce.productMaterial()]: faker.lorem.sentence(7),
+        [faker.commerce.productMaterial()]: faker.lorem.sentence(7),
+        [faker.commerce.productMaterial()]: faker.lorem.sentence(7),
+        [faker.commerce.productMaterial()]: faker.lorem.sentence(7),
+        [faker.commerce.productMaterial()]: faker.lorem.sentence(7),
+        [faker.commerce.productMaterial()]: faker.lorem.sentence(7),
+        [faker.commerce.productMaterial()]: faker.lorem.sentence(7),
+        [faker.commerce.productMaterial()]: faker.lorem.sentence(7),
       }),
-      image: faker.image.imageUrl(),
+      image: 'http://via.placeholder.com/800x600',
     }));
   }
   return Promise.all(promises)
