@@ -21,8 +21,30 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   props: ['product'],
+  methods: {
+    buyClick(e) {
+      e.preventDefault();
+      this.$store.dispatch('buyProduct', {
+        id: this.product.id,
+        count: 1,
+      });
+    },
+    wishClick(e) {
+      e.preventDefault();
+      this.$store.dispatch('wishProduct', {
+        id: this.product.id,
+      });
+    },
+  },
+  computed: mapState({
+    wish(state) {
+      return state.wishList.find(p => p === this.product.id);
+    },
+  }),
 };
 </script>
 

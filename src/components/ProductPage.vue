@@ -31,30 +31,44 @@
 </template>
 
 <script>
-import { getOne, buy } from '../api/products';
+import { mapState } from 'vuex';
 
 export default {
   data() {
     return {
-      product: undefined,
-      wish: false,
+      id: -1,
     };
   },
   created() {
-    getOne(this.$route.params.id)
-      .then((res) => {
-        this.product = res.data;
-      })
-      .catch(console.log); // eslint-disable-line
+    const { id } = this.$route.params;
+    this.id = parseInt(id, 10);
+    if (!this.product) {
+      this.$store.dispatch('getProduct', {
+        id,
+      });
+    }
   },
   methods: {
     buyClick() {
-      buy(this.product.id, 1).then(console.log); // eslint-disable-line
+      this.$store.dispatch('buyProduct', {
+        id: this.id,
+        count: 1,
+      });
     },
     wishClick() {
-      this.$data.wish = !this.$data.wish;
+      this.$store.dispatch('wishProduct', {
+        id: this.id,
+      });
     },
   },
+  computed: mapState({
+    product(state) {
+      return state.products.find(p => p.id === this.id);
+    },
+    wish(state) {
+      return state.wishList.find(p => p === this.id);
+    },
+  }),
 };
 </script>
 

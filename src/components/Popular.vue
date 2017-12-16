@@ -6,25 +6,24 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import ProductList from './ProductList';
-import { getAll as getProductsApi } from '../api/products';
 
 export default {
   name: 'hello',
   data() {
     return {
       msg: 'This motherfucking shit works!',
-      products: [],
     };
   },
   components: {
     'product-list': ProductList,
   },
+  computed: mapState([
+    'products',
+  ]),
   created() {
-    getProductsApi()
-      .then((res) => {
-        this.products = res.data;
-      });
+    this.$store.dispatch('getProducts');
   },
 };
 </script>
