@@ -1,5 +1,5 @@
 <template>
-  <router-link class="container" to="/product/3">
+  <router-link class="container" :to="`/product/${product.id}`">
     <div class="image-wrapper">
       <img class="image" :src="product.image" alt="Laptop" />
     </div>
