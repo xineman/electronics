@@ -23,11 +23,13 @@ export default {
 
 <style lang="postcss" scoped>
   .product-list {
-    margin: 0 -10px;
+    margin: 0 -15px;
   }
   .product {
     display: inline-block;
     text-align: left;
-    margin: 10px;
+    margin: 15px;
+    width: 15%;
+    vertical-align: top;
   }
 </style>

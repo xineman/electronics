@@ -49,8 +49,7 @@ export default {
   },
   methods: {
     buyClick() {
-      buy(this.product.id, 1)
-        .then(console.log) // eslint-disable-line
+      buy(this.product.id, 1).then(console.log); // eslint-disable-line
     },
     wishClick() {
       this.$data.wish = !this.$data.wish;
@@ -60,104 +59,105 @@ export default {
 </script>
 
 
+<style lang="postcss">
+.btn {
+  height: 40px;
+  padding: 5px 10px;
+  margin: 0 10px;
+  border: none;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+}
+.buy-btn {
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 700;
+  transition: 0.3s;
+  border: 2px solid #ed3223;
+  border-radius: 7px;
+  background: #fff;
+  color: #ed3223;
+  &:hover {
+    background: #ed3223;
+    color: #fff;
+  }
+}
+.buy-container {
+  display: flex;
+  align-items: center;
+  margin: 20px -10px;
+}
+.wish-btn {
+  background: transparent;
+  padding: 0;
+}
+.wish-icon {
+  height: 30px;
+  width: 30px;
+}
+</style>
 <style lang="postcss" scoped>
-  .name {
-    margin-bottom: 20px;
-    font-size: 22px;
-    font-weight: 500;
+.name {
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 500;
+}
+.container {
+  display: flex;
+}
+.image-container {
+  width: 500px;
+  height: 400px;
+  position: relative;
+  margin-right: 30px;
+  overflow: hidden;
+}
+.image {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%;
+  min-height: 100%;
+  max-height: 120%;
+}
+.price {
+  // margin: 0 10px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #2b515d;
+}
+.wish-path {
+  fill: #ed3223;
+}
+.params-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.params {
+}
+.param {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  padding: 10px 5px;
+  transition: 0.3s;
+  &:last-child {
+    margin-bottom: 0;
   }
-  .container {
-    display: flex;
+  &:hover {
+    background: #2b515d;
+    color: #fff;
+    transition: none;
   }
-  .image-container {
-    width: 500px;
-    height: 400px;
-    position: relative;
-    margin-right: 10px;
-    overflow: hidden;
-  }
-  .image {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-    max-height: 120%;
-  }
-  .buy-container {
-    display: flex;
-    align-items: center;
-    margin: 20px -10px;
-  }
-  .price {
-    // margin: 0 10px;
-    font-size: 28px;
-    font-weight: 700;
-    color: #2B515D;
-  }
-  .btn {
-    height: 40px;
-    padding: 5px 10px;
-    margin: 0 10px;
-    border: none;
-    cursor: pointer;
-    &:focus {
-      outline: none;
-    }
-  }
-  .buy-btn {
-    text-transform: uppercase;
-    font-size: 16px;
-    font-weight: 700;
-    transition: .3s;
-    border: 2px solid #ED3223;
-    border-radius: 7px;
-    background: #FFF;
-    color: #ED3223;
-    &:hover {
-      background: #ED3223;
-      color: #FFF;
-    }
-  }
-  .wish-btn {
-    background: transparent;
-    padding: 0;
-  }
-  .wish-icon {
-    height: 30px;
-    width: 30px;
-  }
-  .wish-path {
-    fill: #ED3223;
-  }
-  .params-title {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 10px;
-  }
-  .params {
-    
-  }
-  .param {
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    padding: 10px 5px;
-    transition: .3s;
-    &:last-child {
-      margin-bottom: 0;
-    }
-    &:hover {
-      background: #2B515D;
-      color: #FFF;
-      transition: none;
-    }
-  }
-  .param-name {
-    width: 200px;
-  }
-  .param-value {
-    font-weight: 500;
-  }
+}
+.param-name {
+  width: 200px;
+}
+.param-value {
+  font-weight: 500;
+}
 </style>
