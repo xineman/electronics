@@ -38,6 +38,7 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-vue": "^2.1.0",
     "extract-text-webpack-plugin": "^3.0.0",
+    "faker": "^4.1.0",
     "file-loader": "^1.1.4",
     "html-webpack-plugin": "^2.30.1",
     "path": "^0.12.7",
@@ -56,6 +57,7 @@
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack-dev-server --config webpack.dev.js",
     "prod": "npm run build && npm start",
+    "fixtures": "node ./server/commands/index.js fixture",
     "create:tables:win": "node .\\server\\commands\\index.js create:tables",
     "fixture:win": "node .\\server\\commands\\index.js fixture"
   },

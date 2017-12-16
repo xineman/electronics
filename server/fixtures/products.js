@@ -1,45 +1,24 @@
+const faker = require('faker'); // eslint-disable-line
 const Product = require('../models/Product');
 
 
 async function productsFixture() {
-  const productsMock = [
-    {
-      name: 'HP Laptop',
-      price: 850,
-      stock: 3,
-      params: JSON.stringify({
-        screen: '15.6"',
-        hdd: '500 GB',
-      }),
-      image: 'http://via.placeholder.com/850x500',
-      categoryId: 1,
-    },
-    {
-      name: 'Xiaomi Camera',
-      price: 80,
-      stock: 15,
-      params: JSON.stringify({
-        screen: '15.6"',
-        hdd: '500 GB',
-      }),
-      image: 'http://via.placeholder.com/850x500',
-      categoryId: 2,
-    },
-    {
-      name: 'Apple iPhone',
-      price: 1200,
-      stock: 2,
-      params: JSON.stringify({
-        screen: '6"',
-        storage: '256 GB',
-      }),
-      image: 'http://via.placeholder.com/850x500',
-      categoryId: 3,
-    },
-  ];
   const promises = [];
-  for (const product of productsMock) {
-    promises.push(Product.create(product));
+  for (let i = 0; i < 100; i += 1) {
+    promises.push(Product.create({
+      name: faker.commerce.productName(),
+      categoryId: faker.random.number({ min: 1, max: 16, precision: 1 }),
+      price: faker.random.number({ min: 100000, max: 8000000 }),
+      stock: faker.random.number(40),
+      params: JSON.stringify({
+        [faker.commerce.productMaterial()]: faker.commerce.productAdjective(),
+        [faker.commerce.productMaterial()]: faker.commerce.productAdjective(),
+        [faker.commerce.productMaterial()]: faker.commerce.productAdjective(),
+        [faker.commerce.productMaterial()]: faker.commerce.productAdjective(),
+        [faker.commerce.productMaterial()]: faker.commerce.productAdjective(),
+      }),
+      image: faker.image.imageUrl(),
+    }));
   }
   return Promise.all(promises)
     .then(() => 'product fixtures created');

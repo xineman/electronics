@@ -1,21 +1,13 @@
+const faker = require('faker'); // eslint-disable-line
 const Category = require('../models/Category');
 
 
 async function categoriesFixture() {
-  const categorysMock = [
-    {
-      name: 'laptops',
-    },
-    {
-      name: 'cameras',
-    },
-    {
-      name: 'phones',
-    },
-  ];
   const promises = [];
-  for (const category of categorysMock) {
-    promises.push(Category.create(category));
+  for (let i = 0; i <= 15; i += 1) {
+    promises.push(Category.create({
+      name: faker.commerce.department(),
+    }));
   }
   return Promise.all(promises)
     .then(() => 'category fixtures created');
