@@ -14,10 +14,6 @@ export default {
     'product-card': ProductCard,
   },
   props: ['products'],
-  data() {
-    return {
-    };
-  },
 };
 </script>
 

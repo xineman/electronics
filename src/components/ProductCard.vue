@@ -41,8 +41,8 @@ export default {
     },
   },
   computed: mapState({
-    wish(state) {
-      return state.wishList.find(p => p === this.product.id);
+    wish({ user }) {
+      return user.wishList.find(p => p === this.product.id);
     },
   }),
 };

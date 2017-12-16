@@ -37,14 +37,16 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    isAuthenticated: false,
     products: [],
-    cart: [],
-    wishList: [],
+    user: {
+      isAuthenticated: false,
+      cart: [],
+      wishList: [],
+    },
   },
   mutations: {
-    setAuthenticated(state, isAuthenticated) {
-      state.isAuthenticated = isAuthenticated;
+    setAuthenticated({ user }, isAuthenticated) {
+      user.isAuthenticated = isAuthenticated;
     },
     setProducts(state, products) {
       state.products = products;
@@ -52,14 +54,14 @@ const store = new Vuex.Store({
     addProduct(state, product) {
       state.products = [...state.products.filter(p => p.id !== product.id), product];
     },
-    addToWish(state, id) {
-      state.wishList.push(id);
+    addToWish({ user }, id) {
+      user.wishList.push(id);
     },
-    removeFromWish(state, id) {
-      state.wishList = state.wishList.filter(p => p !== id);
+    removeFromWish({ user }, id) {
+      user.wishList = user.wishList.filter(p => p !== id);
     },
-    addToCart(state, id) {
-      state.cart.push(id);
+    addToCart({ user }, id) {
+      user.cart.push(id);
     },
   },
   actions: {

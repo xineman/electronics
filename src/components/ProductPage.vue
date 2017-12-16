@@ -65,8 +65,8 @@ export default {
     product(state) {
       return state.products.find(p => p.id === this.id);
     },
-    wish(state) {
-      return state.wishList.find(p => p === this.id);
+    wish({ user }) {
+      return user.wishList.find(p => p === this.id);
     },
   }),
 };
