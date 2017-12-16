@@ -2,6 +2,22 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
+async function validateToken(req, res, next) {
+  const token = req.get('authorization').split(' ')[1];
+  if (!token) next();
+
+  const username = jwt.verify(token, config.secret).sub;
+  if (!username) next();
+
+  const { dataValues: user } = await User.find({
+    where: {
+      username,
+    },
+  });
+  req.user = user;
+  next();
+}
+
 async function login(req, res) {
   try {
     const { username, password } = req.body;
@@ -97,4 +113,5 @@ module.exports = {
   register,
   getMyProfile,
   getProfile,
+  validateToken,
 };

@@ -27,8 +27,14 @@ function getAll(req, res) {
     .catch(console.log);
 }
 
-function buy(req, res) {
+function cart(req, res) {
   res.sendStatus(200);
+}
+
+function wish(req, res) {
+  res.json({
+    status: 1,
+  });
 }
 
 function create(req, res) {
@@ -47,6 +53,7 @@ function create(req, res) {
 module.exports = {
   getProduct,
   getAll,
-  buy,
+  cart,
+  wish,
   create,
 };

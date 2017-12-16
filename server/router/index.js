@@ -1,7 +1,11 @@
 const router = require('express').Router();
+const { validateToken } = require('../controllers/auth');
+
+router.use('/api/auth', require('./auth'));
+
+router.use(validateToken);
 
 router.use('/api', require('./api'));
 
-router.use('/api/auth', require('./auth'));
 
 module.exports = router;
