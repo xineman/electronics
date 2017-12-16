@@ -7,8 +7,4 @@ router.get('/:id', productsApi.getProduct);
 
 router.get('/', productsApi.getAll);
 
-router.post('/cart', productsApi.cart);
-
-router.post('/wish', productsApi.wish);
-
 module.exports = router;

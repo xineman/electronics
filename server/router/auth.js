@@ -1,12 +1,8 @@
 const router = require('express').Router();
-const usersApi = require('../controllers/auth');
+const auth = require('../controllers/auth');
 
-router.post('/login', usersApi.login);
+router.post('/login', auth.login);
 
-router.post('/register', usersApi.register);
-
-router.get('/me', usersApi.getMyProfile);
-
-router.get('/:id', usersApi.getProfile);
+router.post('/register', auth.register);
 
 module.exports = router;
