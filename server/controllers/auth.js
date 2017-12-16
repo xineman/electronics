@@ -9,7 +9,7 @@ async function validateToken(req, res, next) {
   const username = jwt.verify(token, config.secret).sub;
   if (!username) next();
 
-  const { dataValues: user } = await User.find({
+  const user = await User.find({
     where: {
       username,
     },
@@ -73,45 +73,8 @@ async function register(req, res) {
   }
 }
 
-function getMyProfile(req, res) {
-  User.find({
-    where: {
-      username: req.body.username,
-    },
-  })
-    .then((user) => {
-      console.log('no user');
-      if (user) {
-        const token = jwt.sign({
-          sub: req.body.username,
-        }, config.secret);
-        res.send(token);
-      }
-    })
-    .catch(console.log);
-}
-function getProfile(req, res) {
-  User.find({
-    where: {
-      username: req.body.username,
-    },
-  })
-    .then((user) => {
-      console.log('no user');
-      if (user) {
-        const token = jwt.sign({
-          sub: req.body.username,
-        }, config.secret);
-        res.send(token);
-      }
-    })
-    .catch(console.log);
-}
-
 module.exports = {
   login,
   register,
-  getMyProfile,
-  getProfile,
   validateToken,
 };
