@@ -7,7 +7,11 @@ function getProduct(req, res) {
     },
     raw: true,
   })
-    .then(r => res.json(Object.assign({}, r, { params: JSON.parse(r.params) })))
+    .then(r => res.json({
+      ...r,
+      params: JSON.parse(r.params),
+      price: r.price / 100,
+    }))
     .catch(console.log);
 }
 
@@ -15,8 +19,11 @@ function getAll(req, res) {
   Product.findAll({
     raw: true,
   })
-    .then(records => res.json(records.map(r =>
-      Object.assign({}, r, { params: JSON.parse(r.params) }))))
+    .then(records => res.json(records.map(r => ({
+      ...r,
+      price: r.price / 100,
+      params: JSON.parse(r.params),
+    }))))
     .catch(console.log);
 }
 
