@@ -5,7 +5,7 @@
     </div>
     <div class="description">
       <h3 class="name">{{product.name}}</h3>
-      <p class="price">$ {{product.price}}</p>
+      <p class="price">${{product.price.toLocaleString()}}</p>
       <div class="buy-container">
         <button @click="buyClick" class="buy-btn btn">Buy now</button>
         <button @click="wishClick" class="wish-btn btn">

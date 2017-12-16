@@ -58,46 +58,6 @@ export default {
 };
 </script>
 
-
-<style lang="postcss">
-.btn {
-  height: 40px;
-  padding: 5px 10px;
-  margin: 0 10px;
-  border: none;
-  cursor: pointer;
-  &:focus {
-    outline: none;
-  }
-}
-.buy-btn {
-  text-transform: uppercase;
-  font-size: 16px;
-  font-weight: 700;
-  transition: 0.3s;
-  border: 2px solid #ed3223;
-  border-radius: 7px;
-  background: #fff;
-  color: #ed3223;
-  &:hover {
-    background: #ed3223;
-    color: #fff;
-  }
-}
-.buy-container {
-  display: flex;
-  align-items: center;
-  margin: 20px -10px;
-}
-.wish-btn {
-  background: transparent;
-  padding: 0;
-}
-.wish-icon {
-  height: 30px;
-  width: 30px;
-}
-</style>
 <style lang="postcss" scoped>
 .name {
   margin-bottom: 20px;
