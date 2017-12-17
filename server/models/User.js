@@ -3,6 +3,7 @@ const {
   createApi,
   deleteApi,
   connection,
+  getWishesApi,
 } = require('../services/mysql');
 
 class User {
@@ -28,10 +29,10 @@ class User {
     Object.assign(this, user);
   }
   async getWishes({ id }) {
-    let queryString = `select products.* from products inner join user_wishes as wish on wish.productId = id where wish.userId = ${this.id}`;
-    if (id) queryString += ` AND wish.productId = "${id}"`;
-    const conn = await connection;
-    const [wishes] = await conn.query(queryString);
+    const wishes = await getWishesApi({
+      productId: id,
+      userId: this.id,
+    });
     return wishes;
   }
   async addWish(id) {

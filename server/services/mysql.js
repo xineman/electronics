@@ -58,9 +58,24 @@ async function deleteApi(table, data) {
   }
 }
 
+async function getWishesApi({
+  userId,
+  productId,
+}) {
+  const where = {
+    'wish.userId': userId,
+    'wish.productId': productId,
+  };
+  const queryString = `select products.* from products inner join user_wishes as wish on wish.productId = id where ${parseQuery(where)}`;
+  const conn = await connection;
+  const [wishes] = await conn.query(queryString);
+  return wishes;
+}
+
 module.exports = {
   connection,
   findApi,
   createApi,
   deleteApi,
+  getWishesApi,
 };
