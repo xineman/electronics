@@ -10,9 +10,7 @@ async function validateToken(req, res, next) {
   if (!username) next();
 
   const user = await User.find({
-    where: {
-      username,
-    },
+    username,
   });
   req.user = user;
   next();
@@ -25,9 +23,7 @@ async function login(req, res) {
       throw new Error('No username or password specified.');
     }
     const user = await User.find({
-      where: {
-        username,
-      },
+      username,
     });
     if (user && user.password === password) {
       const token = jwt.sign({
@@ -53,9 +49,7 @@ async function register(req, res) {
       throw new Error('No username or password specified.');
     }
     const user = await User.find({
-      where: {
-        username,
-      },
+      username,
     });
     if (user) {
       res.sendStatus(400);

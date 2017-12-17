@@ -9,10 +9,9 @@ async function wish(req, res) {
   const { id } = req.body;
   try {
     const existing = await req.user.getWishes({
-      where: {
-        id,
-      },
+      id,
     });
+    console.log('Exist:', existing);
     let status;
     if (existing.length) {
       status = 0;
