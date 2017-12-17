@@ -24,7 +24,7 @@ class Product {
     return new Product({ ...values, id });
   }
   constructor(user) {
-    Object.assign(this, user);
+    Object.assign(this, { id: user._id }, user); // eslint-disable-line
   }
 }
 

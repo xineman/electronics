@@ -41,7 +41,7 @@ export default {
   },
   created() {
     const { id } = this.$route.params;
-    this.id = parseInt(id, 10);
+    this.id = id;
     if (!this.product) {
       this.$store.dispatch('getProduct', {
         id,
@@ -63,10 +63,10 @@ export default {
   },
   computed: mapState({
     product(state) {
-      return state.products.find(p => p.id === this.id);
+      return state.products.find(p => p.id == this.id); // eslint-disable-line
     },
     wish({ user }) {
-      return user.wishList.find(p => p === this.id);
+      return user.wishList.find(p => p == this.id); // eslint-disable-line
     },
   }),
 };

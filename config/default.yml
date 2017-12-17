@@ -3,7 +3,7 @@ baseUrl: localhost:3000
 port: 3000
 secret: myuniversity
 
-dbms: mongo
+dbms: mysql
 
 db:
   name: electronics

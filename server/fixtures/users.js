@@ -1,4 +1,4 @@
-const User = require('../models/S_User');
+const User = require('../models/User');
 
 
 async function usersFixture() {
