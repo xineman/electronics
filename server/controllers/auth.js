@@ -4,16 +4,16 @@ const config = require('config');
 
 async function validateToken(req, res, next) {
   const token = req.get('authorization').split(' ')[1];
-  if (!token) next();
+  if (!token || token === 'undefined') return next();
 
   const username = jwt.verify(token, config.secret).sub;
-  if (!username) next();
+  if (!username) return next();
 
   const user = await User.find({
     username,
   });
   req.user = user;
-  next();
+  return next();
 }
 
 async function login(req, res) {
