@@ -1,5 +1,5 @@
 const faker = require('faker'); // eslint-disable-line
-const Category = require('../models/Category');
+const Category = require('../models/S_Category');
 
 
 async function categoriesFixture() {

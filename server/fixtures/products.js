@@ -1,5 +1,5 @@
 const faker = require('faker'); // eslint-disable-line
-const Product = require('../models/Product');
+const Product = require('../models/S_Product');
 
 
 async function productsFixture() {

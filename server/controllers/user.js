@@ -11,7 +11,6 @@ async function wish(req, res) {
     const existing = await req.user.getWishes({
       id,
     });
-    console.log('Exist:', existing);
     let status;
     if (existing.length) {
       status = 0;

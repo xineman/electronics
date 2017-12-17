@@ -1,10 +1,10 @@
+const { dbms } = require('config');
 const {
   findApi,
   createApi,
   deleteApi,
-  connection,
   getWishesApi,
-} = require('../services/mysql');
+} = dbms === 'mysql' ? require('../services/mysql') : require('../services/mongo');
 
 class User {
   static find(where) {
@@ -28,11 +28,17 @@ class User {
   constructor(user) {
     Object.assign(this, user);
   }
-  async getWishes({ id }) {
-    const wishes = await getWishesApi({
-      productId: id,
+  async getWishes(filter) {
+    let query = {
       userId: this.id,
-    });
+    };
+    if (filter && filter.id) {
+      query = {
+        ...query,
+        productId: filter.id,
+      };
+    }
+    const wishes = await getWishesApi(query);
     return wishes;
   }
   async addWish(id) {

@@ -1,12 +1,7 @@
 const mysql = require('mysql2/promise');
-const { db } = require('config');
+const { mysql: config } = require('config');
 
-const connection = mysql.createConnection({
-  host: db.host,
-  database: db.name,
-  user: db.user,
-  password: db.pass,
-});
+const connection = mysql.createConnection(config);
 
 function parseQuery(qu) {
   return Object.keys(qu)
@@ -58,14 +53,16 @@ async function deleteApi(table, data) {
   }
 }
 
-async function getWishesApi({
-  userId,
-  productId,
-}) {
-  const where = {
-    'wish.userId': userId,
-    'wish.productId': productId,
+async function getWishesApi(filters) {
+  let where = {
+    'wish.userId': filters.userId,
   };
+  if (filters && filters.productId) {
+    where = {
+      ...where,
+      'wish.productId': filters.productId,
+    };
+  }
   const queryString = `select products.* from products inner join user_wishes as wish on wish.productId = id where ${parseQuery(where)}`;
   const conn = await connection;
   const [wishes] = await conn.query(queryString);

@@ -1,9 +1,31 @@
-const Sequelize = require('sequelize');
-const sequelize = require('../services/sequelize');
+const { dbms } = require('config');
+const {
+  findApi,
+  createApi,
+} = dbms === 'mysql' ? require('../services/mysql') : require('../services/mongo');
 
-const Category = sequelize.define('category', {
-  id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
-  name: { type: Sequelize.STRING },
-});
+class Category {
+  static find(where) {
+    return findApi('categories', where)
+      .then(categories => categories.map(u => new Category(u)))
+      .then((u) => {
+        switch (u.length) {
+          case 0:
+            return undefined;
+          case 1:
+            return u[0];
+          default:
+            return u;
+        }
+      });
+  }
+  static async create(values) {
+    const { insertId: id } = await createApi('categories', values);
+    return new Category({ ...values, id });
+  }
+  constructor(category) {
+    Object.assign(this, category);
+  }
+}
 
 module.exports = Category;

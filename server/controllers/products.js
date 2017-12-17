@@ -2,29 +2,30 @@ const Product = require('../models/Product');
 
 function getProduct(req, res) {
   Product.find({
-    where: {
-      id: req.params.id,
-    },
-    raw: true,
+    id: req.params.id,
   })
-    .then(r => res.json({
+    .then(r => (r ? res.json({
       ...r,
       params: JSON.parse(r.params),
       price: r.price / 100,
-    }))
+    }) : undefined))
     .catch(console.log);
 }
 
-function getAll(req, res) {
-  Product.findAll({
-    raw: true,
-  })
-    .then(records => res.json(records.map(r => ({
+async function getAll(req, res) {
+  try {
+    const products = await Product.find();
+    if (!products) {
+      return res.json([]);
+    }
+    return res.json(products.map(r => ({
       ...r,
       price: r.price / 100,
       params: JSON.parse(r.params),
-    }))))
-    .catch(console.log);
+    })));
+  } catch (e) {
+    return e;
+  }
 }
 
 
