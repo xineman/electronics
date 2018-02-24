@@ -8,9 +8,11 @@ async function handleCommand(args) {
   switch (args[0]) {
     case 'fixture': {
       await sequelize.sync({ force: true });
-      await usersFixture();
-      await categoriesFixture();
+      // await usersFixture();
+      // await categoriesFixture();
+      console.time();
       await productsFixture();
+      console.timeEnd();
       return 'Fixtures created';
     }
     default:

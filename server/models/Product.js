@@ -5,8 +5,8 @@ const {
 } = dbms === 'mysql' ? require('../services/mysql') : require('../services/mongo');
 
 class Product {
-  static find(where) {
-    return findApi('products', where)
+  static find(where, params) {
+    return findApi('products', where, params)
       .then(users => users.map(u => new Product(u)))
       .then((u) => {
         switch (u.length) {

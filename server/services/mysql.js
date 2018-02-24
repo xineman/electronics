@@ -9,11 +9,19 @@ function parseQuery(qu) {
     .join(' AND ');
 }
 
-async function findApi(table, where) {
+async function findApi(table, where, params) {
   try {
     let queryString;
     if (!where) queryString = `SELECT * FROM ${table}`;
     else queryString = `SELECT * FROM ${table} WHERE ${parseQuery(where)}`;
+    if (params) {
+      if (params.sort) {
+        queryString += ` ORDER BY ${table}.price ${params.sort}`;
+      }
+      if (params.count) {
+        queryString += ` limit ${params.count}`;
+      }
+    }
     const conn = await connection;
     const [items] = await conn.query(queryString);
     return items;

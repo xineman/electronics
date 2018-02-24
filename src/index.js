@@ -12,6 +12,7 @@ import {
   cart,
   wish,
   getOne,
+  filter,
   getWishes as getWishesApi,
 } from './api';
 
@@ -43,6 +44,10 @@ const store = new Vuex.Store({
       isAuthenticated: false,
       cart: [],
       wishList: [],
+      filter: {
+        count: 'all',
+        sort: 'asc',
+      },
     },
   },
   mutations: {
@@ -66,6 +71,9 @@ const store = new Vuex.Store({
     },
     addToCart({ user }, id) {
       user.cart.push(id);
+    },
+    addFilter(state, f) {
+      state.filter = { ...state.filter, ...f };
     },
   },
   actions: {
@@ -110,6 +118,20 @@ const store = new Vuex.Store({
         .then(({ data: { status } }) => {
           const action = status ? 'addToWish' : 'removeFromWish';
           commit(action, id);
+        });
+    },
+    setCount({ commit, state }, c) {
+      commit('addFilter', c);
+      filter(state.filter)
+        .then(({ data }) => {
+          commit('setProducts', data);
+        });
+    },
+    setSort({ commit, state }, s) {
+      commit('addFilter', s);
+      filter(state.filter)
+        .then(({ data }) => {
+          commit('setProducts', data);
         });
     },
   },

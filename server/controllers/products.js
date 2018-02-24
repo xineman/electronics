@@ -12,6 +12,22 @@ function getProduct(req, res) {
     .catch(console.log);
 }
 
+async function filter(req, res) {
+  try {
+    const products = await Product.find(null, req.query);
+    if (!products) {
+      return res.json([]);
+    }
+    return res.json(products.map(r => ({
+      ...r,
+      price: r.price / 100,
+      params: JSON.parse(r.params),
+    })));
+  } catch (e) {
+    return e;
+  }
+}
+
 async function getAll(req, res) {
   try {
     const products = await Product.find();
@@ -45,5 +61,6 @@ function create(req, res) {
 module.exports = {
   getProduct,
   getAll,
+  filter,
   create,
 };
